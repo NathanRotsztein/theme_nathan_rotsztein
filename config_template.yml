@@ -1,0 +1,6 @@
+development:
+  password: 
+  theme_id: "79418622029"
+  store: nathan-rotsztein.myshopify.com
+  ignore_files:
+   - config/settings_data.json
