@@ -1,0 +1,208 @@
+<div style="display: block; text-align: center;">
+  <img src="{{ section.settings.image | img_url: '100x100'}}" alt="image" >
+    <ul>
+        {% for link in linklists[section.settings.main_linklist].links %}
+        <li>
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+  </ul>
+  {% for mix in collections[section.settings.mix_collection].products %}
+            <div class="slideshow-container"  onclick="plusSlides(1)">
+                <div class="mySlides fade">
+                    <div class="numbertext">{{ mix.title | escape }} - {{ mix.price | money }}</div>
+                    <img src="{{ mix | img_url: '1200x800' }}" style="width:100%">
+                </div>
+            </div>
+
+            <div class="slideshow-container"  onclick="plusSlides2(1)">
+                <div class="mySlides2 fade">
+                    <div class="numbertext">{{ mix.title | escape }} - {{ mix.price | money }}</div>
+                    <img src="{{ mix | img_url: '1200x800' }}" style="width:100%">
+                </div>
+            </div>
+        {% endfor %}
+</div>
+ 
+
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+    }
+</script>
+<script>
+    var slideIndex = 1;
+    showSlides2(slideIndex);
+
+    // Next/previous controls
+    function plusSlides2(n) {
+        showSlides2(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide2(n) {
+        showSlides2(slideIndex = n);
+    }
+
+    function showSlides2(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides2");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+    }
+</script>
+
+{% schema %}
+{
+  "name": "Menu",
+  "settings": [
+  {
+    "type": "image_picker",
+    "id": "image",
+    "label": "Image"
+  },
+  {
+    "type": "link_list",
+    "id": "main_linklist",
+    "label": "Menu"
+  }, 
+   {
+     "type": "collection",
+     "id": "mix_collection",
+     "label": "Collection"
+    }  
+  ],
+  "presets": [
+    {
+      "name": "Menu",
+      "category": "Menu Selectionnable"
+    }
+  ]
+}
+
+{% endschema %}
+
+{% stylesheet %}
+* {box-sizing:border-box}
+
+    .slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    }
+
+    .mySlides {
+    display: none;
+    cursor: pointer;
+    }
+    .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    }
+
+    .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+    }
+
+    .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+    }
+
+    .next:hover {
+    background-color: rgba(0,0,0,0.8);
+    }
+
+    .text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+    }
+
+    .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+    }
+
+    .active, .dot:hover {
+    background-color: #717171;
+    }
+
+    .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+    }
+
+    @-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+    }
+
+    @keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+    }
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
